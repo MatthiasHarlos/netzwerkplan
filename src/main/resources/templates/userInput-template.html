@@ -30,16 +30,18 @@
    .button-action {
    margin: 5px;
    }
+   .delete-button {
+   }
     </style>
 </head>
 <body>
 <h1>Willkommen bei ihrem Netzwerkplaner.</h1>
 <div class="main-container">
-<form method="post" action="changing" th:object="${knoten}">
 
         <table>
             <thead>
             <tr>
+                <th> </th>
                 <th>Vorgangsnr.</th>
                 <th>Vorgangsbezeichnung</th>
                 <th>Dauer</th>
@@ -49,6 +51,11 @@
             <tbody>
             <th:block th:each="output : ${geschrieben}">
                 <tr>
+                    <td><div  th:if="${output.getVorgangsnummer().equals(geschrieben.size().toString())}"><form method="post" action="deleteOne">
+                        <div>
+                            <span><button type="submit">-</button></span>
+                        </div>
+                    </form></div> </td>
                     <td th:text="${output.getVorgangsnummer()}"></td>
                     <td th:text="${output.getInputVorgangsbezeichnung()}"></td>
                     <td th:text="${output.getInputDauer()}"></td>
@@ -59,7 +66,11 @@
                     </td>
                 </tr>
             </th:block>
+            </tbody>
+            <div>
+            <form method="post" action="changing" th:object="${knoten}">
             <tr>
+                <td> </td>
                 <td th:text="${vorgangsnummer}"></td>
                 <td><input id="inputVorgangsbezeichnung" name="inputVorgangsbezeichnung"/></td>
                 <td><input id="inputDauer" name="inputDauer"/></td>
@@ -87,20 +98,23 @@
 
                 </td>
             </tr>
-            </tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><div class="button-container">
+                        <span class="button-action"><button type="submit">weiteres Feld</button></span>
+                    </div></td>
+                    <td><div class="button-container">
+                        <span class="button-action"><button type="reset">Reset</button></span>
+                    </div></td>
+                </tr>
+            </form>
+            </div>
         </table>
-        <div class="button-container">
-                <span class="button-action"><button type="submit">weiteres Feld</button></span>
-                <span class="button-action"><button type="reset">Reset</button></span>
-        </div>
 
 
-</form>
-    <form method="post" action="deleteOne">
-        <div class="button-container">
-            <span class="button-action"><button type="submit">vorheriges Feld löschen</button></span>
-        </div>
-    </form>
 <form method="post" action="result">
     <div class="button-container">
         <span class="button-action"><button type="submit">Plan erzeugen</button></span>
