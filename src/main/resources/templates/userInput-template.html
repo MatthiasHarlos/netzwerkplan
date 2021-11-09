@@ -27,6 +27,12 @@
    margin-top: 50px;
    text-align: right;
    }
+     .button-container2 {
+   margin-top: -8%;
+   margin-left: 20px;
+   text-align: left;
+   position: absolute;
+   }
    .button-action {
    margin: 5px;
    }
@@ -37,7 +43,6 @@
 <body>
 <h1>Willkommen bei ihrem Netzwerkplaner.</h1>
 <div class="main-container">
-
         <table>
             <thead>
             <tr>
@@ -105,7 +110,6 @@
                     <td></td>
                     <td><div class="button-container">
                         <span class="button-action"><button type="submit">weiteres Feld</button></span>
-                        <span class="button-action"><button type="reset">Reset</button></span>
                     </div></td>
 
                 </tr>
@@ -113,12 +117,16 @@
             </div>
         </table>
 
-
-<form method="post" action="result">
     <div class="button-container">
+<form method="post" action="result">
         <span class="button-action"><button type="submit">Plan erzeugen</button></span>
-    </div>
 </form>
+    </div>
+    <div class="button-container2">
+        <form method="post" action="deleteAll">
+            <span class="button-action"><button type="submit">Reset</button></span>
+        </form>
+    </div>
 </div>
 </body>
 </html>

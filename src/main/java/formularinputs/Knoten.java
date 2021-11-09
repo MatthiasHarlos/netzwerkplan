@@ -7,6 +7,7 @@ public class Knoten {
     private String vorgaengerEins;
     private String vorgaengerZwei;
     private String vorgaengerDrei;
+    private String nachfolger;
 
     public Knoten() {}
 
@@ -14,6 +15,26 @@ public class Knoten {
         this.vorgangsnummer = vorgangsnummer;
     }
 
+    @Override
+    public String toString() {
+        return "Knoten{" +
+                "inputVorgangsbezeichnung='" + inputVorgangsbezeichnung + '\'' +
+                ", inputDauer='" + inputDauer + '\'' +
+                ", vorgangsnummer='" + vorgangsnummer + '\'' +
+                ", vorgaengerEins='" + vorgaengerEins + '\'' +
+                ", vorgaengerZwei='" + vorgaengerZwei + '\'' +
+                ", vorgaengerDrei='" + vorgaengerDrei + '\'' +
+                ", nachfolger=" + nachfolger +
+                '}';
+    }
+
+    public String getNachfolger() {
+        return nachfolger;
+    }
+
+    public void setNachfolger(String nachfolger) {
+        this.nachfolger = nachfolger;
+    }
 
     public String getInputVorgangsbezeichnung() {
         return inputVorgangsbezeichnung;
