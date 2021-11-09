@@ -34,7 +34,7 @@
 </head>
 <body>
 <h1>Willkommen bei ihrem Netzwerkplaner.</h1>
-<form method="post" action="startpage" th:object="${knoten}">
+<form method="post" action="changing" th:object="${knoten}">
     <div class="main-container">
         <table>
             <thead>
@@ -46,10 +46,18 @@
             </tr>
             </thead>
             <tbody>
+            <th:block th:each="output : ${geschrieben}">
+                <tr>
+                    <td th:text="${output.getVorgangsnummer()}"></td>
+                    <td th:text="${output.getInputVorgangsbezeichnung()}"></td>
+                    <td th:text="${output.getInputDauer()}"></td>
+                    <td th:text="${output.getVorgaengerEins()}"></td>
+                </tr>
+            </th:block>
             <tr>
-                <td th:text="${vorgangsnummer}">-</td>
-                <td><input id="inputVorgangsbezeichnung"/></td>
-                <td><input id="inputDauer"/></td>
+                <td th:text="${vorgangsnummer}"></td>
+                <td><input id="inputVorgangsbezeichnung" name="inputVorgangsbezeichnung"/></td>
+                <td><input id="inputDauer" name="inputDauer"/></td>
                 <td>
                     <button class="button-previous" id="vorgaengerEins" onclick="vorgaenger1">-</button>
                     <button class="button-previous" id="vorgaengerZwei" onclick="vorgaenger2">-</button>

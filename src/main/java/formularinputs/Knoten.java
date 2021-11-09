@@ -3,11 +3,14 @@ package formularinputs;
 public class Knoten {
     private String inputVorgangsbezeichnung;
     private String inputDauer;
-    private Integer vorgangsnummer;
-    private Integer vorgaengerEins;
-    private Integer vorgaengerZwei;
-    private Integer vorgaengerDrei;
+    private String vorgangsnummer;
+    private String vorgaengerEins;
+    private String vorgaengerZwei;
+    private String vorgaengerDrei;
 
+    public Knoten() {
+
+    }
 
     public String getInputVorgangsbezeichnung() {
         return inputVorgangsbezeichnung;
@@ -25,35 +28,35 @@ public class Knoten {
         this.inputDauer = inputDauer;
     }
 
-    public Integer getVorgangsnummer() {
+    public String getVorgangsnummer() {
         return vorgangsnummer;
     }
 
-    public void setVorgangsnummer(Integer vorgangsnummer) {
+    public void setVorgangsnummer(String vorgangsnummer) {
         this.vorgangsnummer = vorgangsnummer;
     }
 
-    public Integer getVorgaengerEins() {
+    public String getVorgaengerEins() {
         return vorgaengerEins;
     }
 
-    public void setVorgaengerEins(Integer vorgaengerEins) {
+    public void setVorgaengerEins(String vorgaengerEins) {
         this.vorgaengerEins = vorgaengerEins;
     }
 
-    public Integer getVorgaengerZwei() {
+    public String getVorgaengerZwei() {
         return vorgaengerZwei;
     }
 
-    public void setVorgaengerZwei(Integer vorgaengerZwei) {
+    public void setVorgaengerZwei(String vorgaengerZwei) {
         this.vorgaengerZwei = vorgaengerZwei;
     }
 
-    public Integer getVorgaengerDrei() {
+    public String getVorgaengerDrei() {
         return vorgaengerDrei;
     }
 
-    public void setVorgaengerDrei(Integer vorgaengerDrei) {
+    public void setVorgaengerDrei(String vorgaengerDrei) {
         this.vorgaengerDrei = vorgaengerDrei;
     }
 
