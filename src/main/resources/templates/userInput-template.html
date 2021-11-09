@@ -67,7 +67,6 @@
 
                     <select class="button-previous" id="vorgaengerEins" name="vorgaengerEins">
                         <option>-</option>
-                        <option>0</option>
                         <th:block th:each="vorgaengerMenge : ${vorgaenger}">
                             <option th:text="${vorgaengerMenge.getVorgangsnummer()}"></option>
                         </th:block>
@@ -75,14 +74,12 @@
 
                     <select class="button-previous" id="vorgaengerZwei" name="vorgaengerZwei">
                         <option>-</option>
-                        <option>0</option>
                         <th:block th:each="vorgaengerMenge : ${vorgaenger}">
                             <option th:text="${vorgaengerMenge.getVorgangsnummer()}"></option>
                         </th:block>
                     </select>
                     <select class="button-previous" id="vorgaengerDrei" name="vorgaengerDrei">
                         <option>-</option>
-                        <option>0</option>
                         <th:block th:each="vorgaengerMenge : ${vorgaenger}">
                             <option th:text="${vorgaengerMenge.getVorgangsnummer()}"></option>
                         </th:block>
@@ -99,6 +96,11 @@
 
 
 </form>
+    <form method="post" action="deleteOne">
+        <div class="button-container">
+            <span class="button-action"><button type="submit">vorheriges Feld löschen</button></span>
+        </div>
+    </form>
 <form method="post" action="result">
     <div class="button-container">
         <span class="button-action"><button type="submit">Plan erzeugen</button></span>

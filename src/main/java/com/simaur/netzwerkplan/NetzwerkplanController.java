@@ -25,6 +25,11 @@ public class NetzwerkplanController {
     public String result(Knoten knoten) {
         return "result-template";
     }
+    @PostMapping("/deleteOne")
+    public String deleting(Knoten knoten) {
+        knotenliste.remove(knotenliste.size()-1);
+        return "redirect:/startpage";
+    }
 
     @GetMapping("startpage")
     private String startpage(Model model) {
