@@ -8,9 +8,12 @@ public class Knoten {
     private String vorgaengerZwei;
     private String vorgaengerDrei;
 
-    public Knoten() {
+    public Knoten() {}
 
+    public Knoten(String vorgangsnummer) {
+        this.vorgangsnummer = vorgangsnummer;
     }
+
 
     public String getInputVorgangsbezeichnung() {
         return inputVorgangsbezeichnung;

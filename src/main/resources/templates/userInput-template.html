@@ -20,7 +20,7 @@
    margin-right: auto;
    }
    .button-previous {
-   width: 30px;
+   width: 50px;
    margin: 5px;
    }
    .button-container {
@@ -28,7 +28,7 @@
    text-align: right;
    }
    .button-action {
-   margin: 25px;
+   margin: 5px;
    }
     </style>
 </head>
@@ -51,7 +51,11 @@
                     <td th:text="${output.getVorgangsnummer()}"></td>
                     <td th:text="${output.getInputVorgangsbezeichnung()}"></td>
                     <td th:text="${output.getInputDauer()}"></td>
-                    <td th:text="${output.getVorgaengerEins()}"></td>
+                    <td>
+                        <span  th:text="${output.getVorgaengerEins()}"></span>
+                        <span  th:text="${output.getVorgaengerZwei()}"></span>
+                        <span  th:text="${output.getVorgaengerDrei()}"></span>
+                    </td>
                 </tr>
             </th:block>
             <tr>
@@ -59,9 +63,30 @@
                 <td><input id="inputVorgangsbezeichnung" name="inputVorgangsbezeichnung"/></td>
                 <td><input id="inputDauer" name="inputDauer"/></td>
                 <td>
-                    <button class="button-previous" id="vorgaengerEins" onclick="vorgaenger1">-</button>
-                    <button class="button-previous" id="vorgaengerZwei" onclick="vorgaenger2">-</button>
-                    <button class="button-previous" id="vorgaengerDrei" onclick="vorgaenger3">-</button>
+
+                    <select class="button-previous" id="vorgaengerEins" name="vorgaengerEins">
+                        <option>-</option>
+                        <option>0</option>
+                        <th:block th:each="vorgaengerMenge : ${vorgaenger}">
+                            <option th:text="${vorgaengerMenge.getVorgangsnummer()}"></option>
+                        </th:block>
+                    </select>
+
+                    <select class="button-previous" id="vorgaengerZwei" name="vorgaengerZwei">
+                        <option>-</option>
+                        <option>0</option>
+                        <th:block th:each="vorgaengerMenge : ${vorgaenger}">
+                            <option th:text="${vorgaengerMenge.getVorgangsnummer()}"></option>
+                        </th:block>
+                    </select>
+                    <select class="button-previous" id="vorgaengerDrei" name="vorgaengerDrei">
+                        <option>-</option>
+                        <option>0</option>
+                        <th:block th:each="vorgaengerMenge : ${vorgaenger}">
+                            <option th:text="${vorgaengerMenge.getVorgangsnummer()}"></option>
+                        </th:block>
+                    </select>
+
                 </td>
             </tr>
             </tbody>

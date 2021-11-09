@@ -18,7 +18,6 @@ public class NetzwerkplanController {
     @PostMapping("/changing")
     public String changing(Knoten knoten) {
         knoten.setVorgangsnummer(Integer.toString(knotenliste.size()+1));
-        knoten.setVorgaengerEins("0");
         knotenliste.add(knoten);
         return "redirect:/startpage";
     }
@@ -27,6 +26,7 @@ public class NetzwerkplanController {
     private String startpage(Model model) {
         model.addAttribute("knoten", new Knoten());
         model.addAttribute("vorgangsnummer", knotenliste.size()+1);
+        model.addAttribute("vorgaenger", knotenliste);
         model.addAttribute("geschrieben", knotenliste);
 
         return "userInput-template";
