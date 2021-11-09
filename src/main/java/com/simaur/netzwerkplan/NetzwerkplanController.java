@@ -12,13 +12,10 @@ import java.util.List;
 @Controller
 public class NetzwerkplanController {
 
-@GetMapping("startpage")
-    private String startpage(Model model) {
-    return "userInput-template";
-}
-    @GetMapping("startpageNeu")
-    private String startpageNeu(Model model, Knoten knoten) {
-        List<Knoten> knotenliste = new ArrayList<>();
+    private List<Knoten> knotenliste = new ArrayList<>();
+
+    @GetMapping("startpage")
+    private String startpage(Model model, Knoten knoten) {
 
         return "userInput-template";
     }
