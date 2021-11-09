@@ -34,8 +34,9 @@
 </head>
 <body>
 <h1>Willkommen bei ihrem Netzwerkplaner.</h1>
+<div class="main-container">
 <form method="post" action="changing" th:object="${knoten}">
-    <div class="main-container">
+
         <table>
             <thead>
             <tr>
@@ -92,13 +93,17 @@
             </tbody>
         </table>
         <div class="button-container">
-                <span class="button-action"><button type="submit">Plan erzeugen</button></span>
-                <span class="button-action"><button type="submit">Reset</button></span>
+                <span class="button-action"><button type="submit">weiteres Feld</button></span>
+                <span class="button-action"><button type="reset">Reset</button></span>
         </div>
 
-        <!--TODO: Add-Button!!!-->
 
+</form>
+<form method="post" action="result">
+    <div class="button-container">
+        <span class="button-action"><button type="submit">Plan erzeugen</button></span>
     </div>
 </form>
+</div>
 </body>
 </html>

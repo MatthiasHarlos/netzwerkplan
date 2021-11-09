@@ -21,6 +21,10 @@ public class NetzwerkplanController {
         knotenliste.add(knoten);
         return "redirect:/startpage";
     }
+    @PostMapping("/result")
+    public String result(Knoten knoten) {
+        return "result-template";
+    }
 
     @GetMapping("startpage")
     private String startpage(Model model) {
