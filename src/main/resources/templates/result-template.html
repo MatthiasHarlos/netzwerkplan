@@ -1,11 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Netzplan</title>
 </head>
 <body>
-<h1>TODO:Result!</h1>
-
+<h1>Netzplan</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Vorgangsnummer</th>
+        <th>Vorgangsbezeichnung</th>
+        <th>Dauer</th>
+        <th>Frühester Beginn</th>
+        <th>Frühestes Ende</th>
+        <th>Spätester Beginn</th>
+        <th>Spätestes Ende</th>
+        <th>Gesamter Puffer</th>
+        <th>Freier Puffer</th>
+        <th>Vorgänger</th>
+        <th>Nachfolger</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vorgang : ${knotenliste}">
+        <td th:text="${vorgang.vorgangsnummer}"></td>
+        <td th:text="${vorgang.vorgangsbezeichnung}"></td>
+        <td th:text="${vorgang.dauer}"></td>
+        <td th:text="${vorgang.fruehesterbeginn}"></td>
+        <td th:text="${vorgang.fruehestesende}"></td>
+        <td th:text="${vorgang.spaetesterbeginn}"></td>
+        <td th:text="${vorgang.spaetestesende}"></td>
+        <td th:text="${vorgang.gesamtpuffer}"></td>
+        <td th:text="${vorgang.freierpuffer}"></td>
+        <td><span th:each="vorgaengerResult : ${vorgang.vorgaenger}" th:text="${vorgaengerResult.vorgangsnummer}"></span></td>
+        <td><span th:each="nachfolgerResult : ${vorgang.nachfolger}" th:text="${nachfolgerResult.vorgangsnummer}"></span></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

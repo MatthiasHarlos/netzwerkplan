@@ -1,11 +1,11 @@
 package com.simaur.netzwerkplan;
 
-import formularinputs.Knoten;
+import forms.Beans;
+import forms.Knots;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,62 +13,88 @@ import java.util.List;
 @Controller
 public class NetzwerkplanController {
 
-    private List<Knoten> knotenliste = new ArrayList<>();
+    private List<Beans> beansliste = new ArrayList<>();
 
     @PostMapping("/changing")
-    public String changing(Knoten knoten) {
-        knoten.setVorgangsnummer(Integer.toString(knotenliste.size()+1));
-        knotenliste.add(knoten);
+    public String changing(Beans beans) {
+        beans.setVorgangsnummer(beansliste.size()+1);
+        beansliste.add(beans);
         return "redirect:/startpage";
     }
-    @PostMapping("/result")
-    public String result(Knoten knoten) {
-        for (int i = (knotenliste.size()-1); i >= 0; i--) {
-            int vorgaengereins;
-            int vorgaengerzwei;
-            int vorgaengerdrei;
-            String nachfolgerfuerVorgaenger = knotenliste.get(i).getVorgangsnummer();
-            if (!knotenliste.get(i).getVorgaengerEins().equals("-")) {
-                vorgaengereins = Integer.parseInt(knotenliste.get(i).getVorgaengerEins()) - 1;
-                String nachfolgerEins = knotenliste.get(vorgaengereins).getNachfolger();
-                nachfolgerEins += nachfolgerfuerVorgaenger + ", ";
-                knotenliste.get(vorgaengereins).setNachfolger(nachfolgerEins);
-            }
-            if (!knotenliste.get(i).getVorgaengerZwei().equals("-")) {
-                vorgaengerzwei = Integer.parseInt(knotenliste.get(i).getVorgaengerZwei()) - 1;
-                String nachfolgerZwei = knotenliste.get(vorgaengerzwei).getNachfolger();
-                nachfolgerZwei += nachfolgerfuerVorgaenger + ", ";
-                knotenliste.get(vorgaengerzwei).setNachfolger(nachfolgerZwei);
-            }
-            if (!knotenliste.get(i).getVorgaengerDrei().equals("-")) {
-                vorgaengerdrei = Integer.parseInt(knotenliste.get(i).getVorgaengerDrei()) - 1;
-                String nachfolgerDrei = knotenliste.get(vorgaengerdrei).getNachfolger();
-                nachfolgerDrei += nachfolgerfuerVorgaenger + ", ";
-                knotenliste.get(vorgaengerdrei).setNachfolger(nachfolgerDrei);
-            }
-            System.out.println(knotenliste.get(i).toString());
-        }
+
+    @GetMapping("/result")
+    public String result(Model model) {
+        List<Knots> knotenliste = calculateBeansToKnots(beansliste);
+        model.addAttribute("knotenliste", knotenliste);
         return "result-template";
     }
 
-    @PostMapping("/deleteOne")
-    public String deleting(Knoten knoten) {
-        knotenliste.remove(knotenliste.size()-1);
+    private List<Knots> calculateBeansToKnots(List<Beans> beanslist) {
+        List<Knots> result = new ArrayList<>();
+        for (Beans bean : beanslist) {
+            result.add(new Knots(bean.getVorgangsnummer(),bean.getInputVorgangsbezeichnung(),bean.getInputDauer()));
+        }
+        result = getVorgaenger(result);
+        result = kalkuliereNachfolger(result);
+        return result;
+    }
+
+    private List<Knots> kalkuliereNachfolger(List<Knots> knotenlist) {
+        for (int i = (beansliste.size()-1); i >= 0; i--) {
+            int vorgaengereins;
+            int vorgaengerzwei;
+            int vorgaengerdrei;
+            int nachfolgerfuerVorgaenger = beansliste.get(i).getVorgangsnummer();
+            if (beansliste.get(i).getVorgaengerEins() != null) {
+                vorgaengereins = beansliste.get(i).getVorgaengerEins() - 1;
+                knotenlist.get(vorgaengereins).getNachfolger().add(knotenlist.get(nachfolgerfuerVorgaenger-1));
+            }
+            if (beansliste.get(i).getVorgaengerZwei() != null) {
+                vorgaengerzwei = beansliste.get(i).getVorgaengerZwei() - 1;
+                knotenlist.get(vorgaengerzwei).getNachfolger().add(knotenlist.get(nachfolgerfuerVorgaenger-1));
+            }
+            if (beansliste.get(i).getVorgaengerDrei() != null) {
+                vorgaengerdrei =beansliste.get(i).getVorgaengerDrei() - 1;
+                knotenlist.get(vorgaengerdrei).getNachfolger().add(knotenlist.get(nachfolgerfuerVorgaenger-1));
+            }
+            System.out.println(beansliste.get(i).toString());
+        }
+        return knotenlist;
+    }
+
+    private List<Knots> getVorgaenger(List<Knots> knotenlist) {
+        for (int i = 0; i< beansliste.size(); i++ ) {
+            if (beansliste.get(i).getVorgaengerEins() != null) {
+                knotenlist.get(i).getVorgaenger().add(knotenlist.get(beansliste.get(i).getVorgaengerEins() - 1));
+            }
+            if (beansliste.get(i).getVorgaengerZwei() != null) {
+                knotenlist.get(i).getVorgaenger().add(knotenlist.get(beansliste.get(i).getVorgaengerZwei() - 1));
+            }
+            if (beansliste.get(i).getVorgaengerDrei() != null) {
+                knotenlist.get(i).getVorgaenger().add(knotenlist.get(beansliste.get(i).getVorgaengerDrei() - 1));
+            }
+        }
+        return knotenlist;
+    }
+
+    @GetMapping("/deleteOne")
+    public String deleting(Beans beans) {
+        beansliste.remove(beansliste.size()-1);
         return "redirect:/startpage";
     }
 
-    @PostMapping("/deleteAll")
-    public String deletingAll(Knoten knoten) {
-        knotenliste = new ArrayList<>();
+    @GetMapping("/deleteAll")
+    public String deletingAll(Beans beans) {
+        beansliste = new ArrayList<>();
         return "redirect:/startpage";
     }
 
     @GetMapping("startpage")
     private String startpage(Model model) {
-        model.addAttribute("knoten", new Knoten());
-        model.addAttribute("vorgangsnummer", knotenliste.size()+1);
-        model.addAttribute("vorgaenger", knotenliste);
-        model.addAttribute("geschrieben", knotenliste);
+        model.addAttribute("knoten", new Beans());
+        model.addAttribute("vorgangsnummer", beansliste.size()+1);
+        model.addAttribute("vorgaenger", beansliste);
+        model.addAttribute("geschrieben", beansliste);
 
         return "userInput-template";
     }

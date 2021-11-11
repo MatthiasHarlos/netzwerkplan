@@ -1,17 +1,19 @@
-package formularinputs;
+package forms;
 
-public class Knoten {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Beans {
     private String inputVorgangsbezeichnung;
-    private String inputDauer;
-    private String vorgangsnummer;
-    private String vorgaengerEins;
-    private String vorgaengerZwei;
-    private String vorgaengerDrei;
-    private String nachfolger;
+    private int inputDauer;
+    private int vorgangsnummer;
+    private Integer vorgaengerEins;
+    private Integer vorgaengerZwei;
+    private Integer vorgaengerDrei;
 
-    public Knoten() {}
+    public Beans() {}
 
-    public Knoten(String vorgangsnummer) {
+    public Beans(int vorgangsnummer) {
         this.vorgangsnummer = vorgangsnummer;
     }
 
@@ -24,16 +26,8 @@ public class Knoten {
                 ", vorgaengerEins='" + vorgaengerEins + '\'' +
                 ", vorgaengerZwei='" + vorgaengerZwei + '\'' +
                 ", vorgaengerDrei='" + vorgaengerDrei + '\'' +
-                ", nachfolger=" + nachfolger +
+                ", nachfolger='" +
                 '}';
-    }
-
-    public String getNachfolger() {
-        return nachfolger;
-    }
-
-    public void setNachfolger(String nachfolger) {
-        this.nachfolger = nachfolger;
     }
 
     public String getInputVorgangsbezeichnung() {
@@ -44,43 +38,43 @@ public class Knoten {
         this.inputVorgangsbezeichnung = inputVorgangsbezeichnung;
     }
 
-    public String getInputDauer() {
+    public int getInputDauer() {
         return inputDauer;
     }
 
-    public void setInputDauer(String inputDauer) {
+    public void setInputDauer(int inputDauer) {
         this.inputDauer = inputDauer;
     }
 
-    public String getVorgangsnummer() {
+    public int getVorgangsnummer() {
         return vorgangsnummer;
     }
 
-    public void setVorgangsnummer(String vorgangsnummer) {
+    public void setVorgangsnummer(int vorgangsnummer) {
         this.vorgangsnummer = vorgangsnummer;
     }
 
-    public String getVorgaengerEins() {
+    public Integer getVorgaengerEins() {
         return vorgaengerEins;
     }
 
-    public void setVorgaengerEins(String vorgaengerEins) {
+    public void setVorgaengerEins(Integer vorgaengerEins) {
         this.vorgaengerEins = vorgaengerEins;
     }
 
-    public String getVorgaengerZwei() {
+    public Integer getVorgaengerZwei() {
         return vorgaengerZwei;
     }
 
-    public void setVorgaengerZwei(String vorgaengerZwei) {
+    public void setVorgaengerZwei(Integer vorgaengerZwei) {
         this.vorgaengerZwei = vorgaengerZwei;
     }
 
-    public String getVorgaengerDrei() {
+    public Integer getVorgaengerDrei() {
         return vorgaengerDrei;
     }
 
-    public void setVorgaengerDrei(String vorgaengerDrei) {
+    public void setVorgaengerDrei(Integer vorgaengerDrei) {
         this.vorgaengerDrei = vorgaengerDrei;
     }
 

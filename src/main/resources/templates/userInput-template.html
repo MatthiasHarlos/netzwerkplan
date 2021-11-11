@@ -56,7 +56,7 @@
             <tbody>
             <th:block th:each="output : ${geschrieben}">
                 <tr>
-                    <td><div  th:if="${output.getVorgangsnummer().equals(geschrieben.size().toString())}"><form method="post" action="deleteOne">
+                    <td><div  th:if="${output.getVorgangsnummer().equals(geschrieben.size().toString())}"><form method="get" action="deleteOne">
                         <div>
                             <span><button type="submit">-</button></span>
                         </div>
@@ -73,7 +73,7 @@
             </th:block>
             </tbody>
             <div>
-            <form method="post" action="changing" th:object="${knoten}">
+            <form method="post" action="changing" th:object="${beans}">
             <tr>
                 <td> </td>
                 <td th:text="${vorgangsnummer}"></td>
@@ -82,20 +82,20 @@
                 <td>
 
                     <select class="button-previous" id="vorgaengerEins" name="vorgaengerEins">
-                        <option>-</option>
+                        <option></option>
                         <th:block th:each="vorgaengerMenge : ${vorgaenger}">
                             <option th:text="${vorgaengerMenge.getVorgangsnummer()}"></option>
                         </th:block>
                     </select>
 
                     <select class="button-previous" id="vorgaengerZwei" name="vorgaengerZwei">
-                        <option>-</option>
+                        <option></option>
                         <th:block th:each="vorgaengerMenge : ${vorgaenger}">
                             <option th:text="${vorgaengerMenge.getVorgangsnummer()}"></option>
                         </th:block>
                     </select>
                     <select class="button-previous" id="vorgaengerDrei" name="vorgaengerDrei">
-                        <option>-</option>
+                        <option></option>
                         <th:block th:each="vorgaengerMenge : ${vorgaenger}">
                             <option th:text="${vorgaengerMenge.getVorgangsnummer()}"></option>
                         </th:block>
@@ -118,12 +118,12 @@
         </table>
 
     <div class="button-container">
-<form method="post" action="result">
+<form method="get" action="result">
         <span class="button-action"><button type="submit">Plan erzeugen</button></span>
 </form>
     </div>
     <div class="button-container2">
-        <form method="post" action="deleteAll">
+        <form method="get" action="deleteAll">
             <span class="button-action"><button type="submit">Reset</button></span>
         </form>
     </div>
