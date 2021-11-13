@@ -17,6 +17,15 @@ public class Beans {
         this.vorgangsnummer = vorgangsnummer;
     }
 
+    public Beans(String inputVorgangsbezeichnung, int inputDauer, int vorgangsnummer, Integer vorgaengerEins, Integer vorgaengerZwei, Integer vorgaengerDrei) {
+        this.inputVorgangsbezeichnung = inputVorgangsbezeichnung;
+        this.inputDauer = inputDauer;
+        this.vorgangsnummer = vorgangsnummer;
+        this.vorgaengerEins = vorgaengerEins;
+        this.vorgaengerZwei = vorgaengerZwei;
+        this.vorgaengerDrei = vorgaengerDrei;
+    }
+
     @Override
     public String toString() {
         return "Knoten{" +

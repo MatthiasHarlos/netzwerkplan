@@ -23,6 +23,21 @@ public class Knots {
     }
     public Knots(){}
 
+    @Override
+    public String toString() {
+        return "Knots{" +
+                "vorgangsnummer=" + vorgangsnummer +
+                ", vorgangsbezeichnung='" + vorgangsbezeichnung + '\'' +
+                ", dauer=" + dauer +
+                ", fruehesterbeginn=" + fruehesterbeginn +
+                ", fruehestesende=" + fruehestesende +
+                ", spaetesterbeginn=" + spaetesterbeginn +
+                ", spaetestesende=" + spaetestesende +
+                ", gesamtpuffer=" + gesamtpuffer +
+                ", freierpuffer=" + freierpuffer +
+                '}';
+    }
+
     public int getVorgangsnummer() {
         return vorgangsnummer;
     }

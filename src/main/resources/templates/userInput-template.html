@@ -80,14 +80,12 @@
                 <td><input id="inputVorgangsbezeichnung" name="inputVorgangsbezeichnung"/></td>
                 <td><input id="inputDauer" name="inputDauer"/></td>
                 <td>
-
                     <select class="button-previous" id="vorgaengerEins" name="vorgaengerEins">
                         <option></option>
                         <th:block th:each="vorgaengerMenge : ${vorgaenger}">
                             <option th:text="${vorgaengerMenge.getVorgangsnummer()}"></option>
                         </th:block>
                     </select>
-
                     <select class="button-previous" id="vorgaengerZwei" name="vorgaengerZwei">
                         <option></option>
                         <th:block th:each="vorgaengerMenge : ${vorgaenger}">
@@ -100,7 +98,6 @@
                             <option th:text="${vorgaengerMenge.getVorgangsnummer()}"></option>
                         </th:block>
                     </select>
-
                 </td>
             </tr>
                 <tr>
