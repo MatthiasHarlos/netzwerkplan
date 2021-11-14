@@ -61,6 +61,16 @@ class NetzwerkplanApplicationTests {
 			for (Knots knoten : pfad) {
 				System.out.print(knoten.getSpaetestesende() + ", ");
 			}
+			System.out.println();
+			System.out.print("Gesamtpuffer: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getGesamtpuffer() + ", ");
+			}
+			System.out.println();
+			System.out.print("Freier Puffer: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getFreierpuffer() + ", ");
+			}
 			System.out.println("\nnext");
 		}
 	}

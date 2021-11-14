@@ -38,16 +38,14 @@ public class NetzwerkplanController {
             result.add(new Knots(bean.getVorgangsnummer(),bean.getInputVorgangsbezeichnung(),bean.getInputDauer()));
         }
         List<Knots> resultAddedPredecessor = getVorgaenger(result);
-        List<Knots> resultAddedSuccessor = kalkuliereNachfolger(resultAddedPredecessor);
-        List<List<Knots>> endpaths = kalkulierePfade(resultAddedSuccessor);
+        List<Knots> resultwithSubsequentResults = kalkuliereNachfolger(resultAddedPredecessor);
+        List<List<Knots>> endpaths = kalkulierePfade(resultwithSubsequentResults);
         List<List<Knots>> pathsWithCalcedEarliestDurations = kalkuliereFrueheZeiten(endpaths);
-        List<List<Knots>> pathsWithCalcedLatestDurations = kalkuliereSpaeteZeiten(pathsWithCalcedEarliestDurations);
-
-        testknotenliste = pathsWithCalcedEarliestDurations;
-        return resultAddedSuccessor;
+        testknotenliste = kalkuliereSpaeteZeitenlPuffer(pathsWithCalcedEarliestDurations);
+        return resultwithSubsequentResults;
     }
 
-    private List<List<Knots>> kalkuliereSpaeteZeiten(List<List<Knots>> pathsWithCalcedEarliestDurations) {
+    private List<List<Knots>> kalkuliereSpaeteZeitenlPuffer(List<List<Knots>> pathsWithCalcedEarliestDurations) {
         for (int i = biggestPath.get(0).getPath().size()-1; i>= 0; i--) {
             if (biggestPath.get(0).getPath().get(i).getNachfolger().size() == 0) {
                 int latestEnd = biggestPath.get(0).getPath().get(i).getFruehestesende();
@@ -65,6 +63,12 @@ public class NetzwerkplanController {
                     int latestEnd = pathTiming.get(i+1).getSpaetesterbeginn();
                     pathTiming.get(i).setSpaetestesende(latestEnd);
                     pathTiming.get(i).setSpaetesterbeginn(latestEnd-pathTiming.get(i).getDauer());
+                }
+                if (pathTiming.get(i).getNachfolger().size() > 0) {
+                    int freePuffer = pathTiming.get(i+1).getFruehesterbeginn()-pathTiming.get(i).getFruehestesende();
+                    int totalPuffer = pathTiming.get(i).getSpaetestesende()-pathTiming.get(i).getFruehestesende();
+                    pathTiming.get(i).setFreierpuffer(freePuffer);
+                    pathTiming.get(i).setGesamtpuffer(totalPuffer);
                 }
             }
         }
