@@ -186,8 +186,8 @@ class NetzwerkplanApplicationTests {
 		NetzwerkplanController controller = new NetzwerkplanController();
 		List<Beans> beanslist = new ArrayList<>();
 		beanslist.add(new Beans("Entscheidung GE",2,1,null,null,null));
-		beanslist.add(new Beans("Angebote einholen",14,2,1,null,null));
-		beanslist.add(new Beans("Mitarbeiterinformationen",1,3,2,null,null));
+		beanslist.add(new Beans("Angebote einholen",1,2,1,null,null));
+		beanslist.add(new Beans("Mitarbeiterinformationen",3,3,2,null,null));
 		controller.beansliste.addAll(beanslist);
 		controller.calculateBeansToKnots(beanslist);
 		for (List<Knots> pfad : controller.testknotenliste) {
