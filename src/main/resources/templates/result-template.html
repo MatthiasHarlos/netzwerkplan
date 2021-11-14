@@ -58,8 +58,8 @@
         <td class="times" th:text="${vorgang.spaetestesende}"></td>
         <td class="buffer" th:text="${vorgang.gesamtpuffer}"></td>
         <td class="buffer" th:text="${vorgang.freierpuffer}"></td>
-        <td class="otherKnots"><span th:each="vorgaengerResult : ${vorgang.vorgaenger}" th:text="${vorgaengerResult.vorgangsnummer}"></span></td>
-        <td class="otherKnots"><span th:each="nachfolgerResult : ${vorgang.nachfolger}" th:text="${nachfolgerResult.vorgangsnummer}"></span></td>
+        <td class="otherKnots"><span th:each="vorgaengerResult : ${vorgang.vorgaenger}" th:text="${vorgaengerResult.vorgangsnummer + ', '}"></span></td>
+        <td class="otherKnots"><span th:each="nachfolgerResult : ${vorgang.nachfolger}" th:text="${nachfolgerResult.vorgangsnummer + ', '}"></span></td>
     </tr>
     </tbody>
 </table>
