@@ -37,19 +37,31 @@ class NetzwerkplanApplicationTests {
 		controller.calculateBeansToKnots(beanslist);
 		for (List<Knots> pfad : controller.testknotenliste) {
 			//System.out.println(pfad.getFinalDuration());
-			System.out.println("Vorgangsnummer: ");
+			System.out.print("Vorgangsnummer: ");
 			for (Knots knoten : pfad) {
 				System.out.print(knoten.getVorgangsnummer() + ", ");
 			}
-			System.out.println("frühestes Ende: ");
-			for (Knots knoten : pfad) {
-				System.out.print(knoten.getFruehestesende() + ", ");
-			}
-			System.out.println("frühester Beginn: ");
+			System.out.println();
+			System.out.print("frühester beginn: ");
 			for (Knots knoten : pfad) {
 				System.out.print(knoten.getFruehesterbeginn() + ", ");
 			}
-			System.out.println("next");
+			System.out.println();
+			System.out.print("frühestes Ende: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getFruehestesende() + ", ");
+			}
+			System.out.println();
+			System.out.print("Spätester Beginn: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getSpaetesterbeginn() + ", ");
+			}
+			System.out.println();
+			System.out.print("Spätestes Ende: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getSpaetestesende() + ", ");
+			}
+			System.out.println("\nnext");
 		}
 	}
 
@@ -68,19 +80,31 @@ class NetzwerkplanApplicationTests {
 		controller.calculateBeansToKnots(beanslist);
 		for (List<Knots> pfad : controller.testknotenliste) {
 			//System.out.println(pfad.getFinalDuration());
-			System.out.println("Vorgangsnummer: ");
+			System.out.print("Vorgangsnummer: ");
 			for (Knots knoten : pfad) {
 				System.out.print(knoten.getVorgangsnummer() + ", ");
 			}
-			System.out.println("frühestes Ende: ");
-			for (Knots knoten : pfad) {
-				System.out.print(knoten.getFruehestesende() + ", ");
-			}
-			System.out.println("frühester Beginn: ");
+			System.out.println();
+			System.out.print("frühester beginn: ");
 			for (Knots knoten : pfad) {
 				System.out.print(knoten.getFruehesterbeginn() + ", ");
 			}
-			System.out.println("next");
+			System.out.println();
+			System.out.print("frühestes Ende: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getFruehestesende() + ", ");
+			}
+			System.out.println();
+			System.out.print("Spätester Beginn: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getSpaetesterbeginn() + ", ");
+			}
+			System.out.println();
+			System.out.print("Spätestes Ende: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getSpaetestesende() + ", ");
+			}
+			System.out.println("\nnext");
 		}
 	}
 
@@ -104,14 +128,24 @@ class NetzwerkplanApplicationTests {
 				System.out.print(knoten.getVorgangsnummer() + ", ");
 			}
 			System.out.println();
+			System.out.print("frühester beginn: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getFruehesterbeginn() + ", ");
+			}
+			System.out.println();
 			System.out.print("frühestes Ende: ");
 			for (Knots knoten : pfad) {
 				System.out.print(knoten.getFruehestesende() + ", ");
 			}
 			System.out.println();
-			System.out.print("frühester Beginn: ");
+			System.out.print("Spätester Beginn: ");
 			for (Knots knoten : pfad) {
-				System.out.print(knoten.getFruehesterbeginn() + ", ");
+				System.out.print(knoten.getSpaetesterbeginn() + ", ");
+			}
+			System.out.println();
+			System.out.print("Spätestes Ende: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getSpaetestesende() + ", ");
 			}
 			System.out.println("\nnext");
 		}
@@ -133,14 +167,24 @@ class NetzwerkplanApplicationTests {
 				System.out.print(knoten.getVorgangsnummer() + ", ");
 			}
 			System.out.println();
+			System.out.print("frühester beginn: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getFruehesterbeginn() + ", ");
+			}
+			System.out.println();
 			System.out.print("frühestes Ende: ");
 			for (Knots knoten : pfad) {
 				System.out.print(knoten.getFruehestesende() + ", ");
 			}
 			System.out.println();
-			System.out.print("frühester Beginn: ");
+			System.out.print("Spätester Beginn: ");
 			for (Knots knoten : pfad) {
-				System.out.print(knoten.getFruehesterbeginn() + ", ");
+				System.out.print(knoten.getSpaetesterbeginn() + ", ");
+			}
+			System.out.println();
+			System.out.print("Spätestes Ende: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getSpaetestesende() + ", ");
 			}
 			System.out.println("\nnext");
 		}
@@ -150,8 +194,8 @@ class NetzwerkplanApplicationTests {
 	void someSOUTPut5() {
 		NetzwerkplanController controller = new NetzwerkplanController();
 		List<Beans> beanslist = new ArrayList<>();
-		beanslist.add(new Beans("Entscheidung GE",2,1,null,null,null));
-		beanslist.add(new Beans("Angebote einholen",3,2,1,null,null));
+		beanslist.add(new Beans("Entscheidung GE", 2, 1, null, null, null));
+		beanslist.add(new Beans("Angebote einholen", 3, 2, 1, null, null));
 		controller.beansliste.addAll(beanslist);
 		controller.calculateBeansToKnots(beanslist);
 		for (List<Knots> pfad : controller.testknotenliste) {
@@ -161,14 +205,24 @@ class NetzwerkplanApplicationTests {
 				System.out.print(knoten.getVorgangsnummer() + ", ");
 			}
 			System.out.println();
+			System.out.print("frühester beginn: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getFruehesterbeginn() + ", ");
+			}
+			System.out.println();
 			System.out.print("frühestes Ende: ");
 			for (Knots knoten : pfad) {
 				System.out.print(knoten.getFruehestesende() + ", ");
 			}
 			System.out.println();
-			System.out.print("frühester Beginn: ");
+			System.out.print("Spätester Beginn: ");
 			for (Knots knoten : pfad) {
-				System.out.print(knoten.getFruehesterbeginn() + ", ");
+				System.out.print(knoten.getSpaetesterbeginn() + ", ");
+			}
+			System.out.println();
+			System.out.print("Spätestes Ende: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getSpaetestesende() + ", ");
 			}
 			System.out.println("\nnext");
 		}

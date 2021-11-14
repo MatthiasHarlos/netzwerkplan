@@ -14,7 +14,8 @@ import java.util.*;
 public class NetzwerkplanController {
 
     public List<Beans> beansliste = new ArrayList<>();
-    public List<Paths> testPathList = new ArrayList<>();
+    public List<Paths> pathsList = new ArrayList<>();
+    private final List<Paths> biggestPath = new ArrayList<>();
     public List<List<Knots>> testknotenliste = new ArrayList<>();
 
     @PostMapping("/changing")
@@ -39,9 +40,35 @@ public class NetzwerkplanController {
         List<Knots> resultAddedPredecessor = getVorgaenger(result);
         List<Knots> resultAddedSuccessor = kalkuliereNachfolger(resultAddedPredecessor);
         List<List<Knots>> endpaths = kalkulierePfade(resultAddedSuccessor);
-        List<List<Knots>> pathsWithCalcedDurations = kalkuliereFrueheZeiten(endpaths);
-        testknotenliste = pathsWithCalcedDurations;
+        List<List<Knots>> pathsWithCalcedEarliestDurations = kalkuliereFrueheZeiten(endpaths);
+        List<List<Knots>> pathsWithCalcedLatestDurations = kalkuliereSpaeteZeiten(pathsWithCalcedEarliestDurations);
+
+        testknotenliste = pathsWithCalcedEarliestDurations;
         return resultAddedSuccessor;
+    }
+
+    private List<List<Knots>> kalkuliereSpaeteZeiten(List<List<Knots>> pathsWithCalcedEarliestDurations) {
+        for (int i = biggestPath.get(0).getPath().size()-1; i>= 0; i--) {
+            if (biggestPath.get(0).getPath().get(i).getNachfolger().size() == 0) {
+                int latestEnd = biggestPath.get(0).getPath().get(i).getFruehestesende();
+                biggestPath.get(0).getPath().get(i).setSpaetestesende(latestEnd);
+                biggestPath.get(0).getPath().get(i).setSpaetesterbeginn(latestEnd-biggestPath.get(0).getPath().get(i).getDauer());
+            } else {
+                int latestEnd = biggestPath.get(0).getPath().get(i+1).getSpaetesterbeginn();
+                biggestPath.get(0).getPath().get(i).setSpaetestesende(latestEnd);
+                biggestPath.get(0).getPath().get(i).setSpaetesterbeginn(latestEnd-biggestPath.get(0).getPath().get(i).getDauer());
+            }
+        }
+        for (List<Knots> pathTiming : pathsWithCalcedEarliestDurations) {
+            for (int i = pathTiming.size()-1; i >=0; i--) {
+                if (pathTiming.get(i).getSpaetestesende() == 0) {
+                    int latestEnd = pathTiming.get(i+1).getSpaetesterbeginn();
+                    pathTiming.get(i).setSpaetestesende(latestEnd);
+                    pathTiming.get(i).setSpaetesterbeginn(latestEnd-pathTiming.get(i).getDauer());
+                }
+            }
+        }
+        return pathsWithCalcedEarliestDurations;
     }
 
     private List<List<Knots>> kalkuliereFrueheZeiten(List<List<Knots>> endpaths) {
@@ -60,7 +87,6 @@ public class NetzwerkplanController {
             Paths path = new Paths(durationCounter, duration);
             paths.add(path);
         }
-        List<Paths> biggestPath = new ArrayList<>();
         for (int i = 0; i<paths.size(); i++) {
             for (int y = 0; y<paths.size(); y++) {
                 if (paths.get(i).getFinalDuration() == max) {
@@ -88,7 +114,7 @@ public class NetzwerkplanController {
                 }
             }
         }
-        testPathList.addAll(paths);
+        pathsList.addAll(paths);
         return endpaths;
     }
 
