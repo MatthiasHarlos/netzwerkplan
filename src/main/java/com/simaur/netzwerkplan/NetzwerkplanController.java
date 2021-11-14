@@ -39,13 +39,6 @@ public class NetzwerkplanController {
         List<Knots> resultAddedPredecessor = getVorgaenger(result);
         List<Knots> resultAddedSuccessor = kalkuliereNachfolger(resultAddedPredecessor);
         List<List<Knots>> endpaths = kalkulierePfade(resultAddedSuccessor);
-        for(int i = 0; i<endpaths.size(); i++) {
-            for (int y = 0; y<endpaths.size(); y++) {
-                if (endpaths.get(i).equals(endpaths.get(y)) && endpaths.size()>1) {
-                    endpaths.remove(y);
-                }
-            }
-        }
 
         List<Paths> paths = new ArrayList<>();
         int max = 0;
@@ -165,6 +158,13 @@ public class NetzwerkplanController {
                 }
             }
         } while (schleife);
+        for(int i = 0; i<endpaths.size(); i++) {
+            for (int y = endpaths.size()-1; y>=0; y--) {
+                if (endpaths.get(i).equals(endpaths.get(y)) && endpaths.size()>1 && y != i) {
+                    endpaths.remove(y);
+                }
+            }
+        }
         return endpaths;
     }
 
