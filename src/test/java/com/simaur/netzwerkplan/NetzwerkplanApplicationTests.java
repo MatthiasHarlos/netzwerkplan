@@ -57,13 +57,13 @@ class NetzwerkplanApplicationTests {
 	void someSOUTPut2() {
 		NetzwerkplanController controller = new NetzwerkplanController();
 		List<Beans> beanslist = new ArrayList<>();
-		beanslist.add(new Beans("Entscheidung GE",2,1,null,null,null));
-		beanslist.add(new Beans("Angebote einholen",14,2,null,null,null));
-		beanslist.add(new Beans("Mitarbeiterinformationen",1,3,1,2,null));
-		beanslist.add(new Beans("Testen G1",1,4,3,null,null));
-		beanslist.add(new Beans("Testen G2",2,5,3,null,null));
-		beanslist.add(new Beans("Testen G3",1,6,4,5,null));
-		beanslist.add(new Beans("Auswahl Lieferanten",1,7,6,null,null));
+		beanslist.add(new Beans("Vorgang1",2,1,null,null,null));
+		beanslist.add(new Beans("Vorgang2",3,2,null,null,null));
+		beanslist.add(new Beans("Vorgang3",6,3,1,2,null));
+		beanslist.add(new Beans("Vorgang4",2,4,3,null,null));
+		beanslist.add(new Beans("Vorgang5",1,5,3,null,null));
+		beanslist.add(new Beans("Vorgang6",4,6,4,5,null));
+		beanslist.add(new Beans("Vorgang7",2,7,6,null,null));
 		controller.beansliste.addAll(beanslist);
 		controller.calculateBeansToKnots(beanslist);
 		for (List<Knots> pfad : controller.testknotenliste) {
