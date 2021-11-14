@@ -39,7 +39,12 @@ public class NetzwerkplanController {
         List<Knots> resultAddedPredecessor = getVorgaenger(result);
         List<Knots> resultAddedSuccessor = kalkuliereNachfolger(resultAddedPredecessor);
         List<List<Knots>> endpaths = kalkulierePfade(resultAddedSuccessor);
+        List<List<Knots>> pathsWithCalcedDurations = kalkuliereFrueheZeiten(endpaths);
+        testknotenliste = pathsWithCalcedDurations;
+        return resultAddedSuccessor;
+    }
 
+    private List<List<Knots>> kalkuliereFrueheZeiten(List<List<Knots>> endpaths) {
         List<Paths> paths = new ArrayList<>();
         int max = 0;
         for (List<Knots> durationCounter : endpaths) {
@@ -63,30 +68,28 @@ public class NetzwerkplanController {
                 }
             }
         }
-        for (Paths großerpfad : biggestPath) {
+        for (Paths grosserPfad : biggestPath) {
             for (int i = 0; i < biggestPath.get(0).getPath().size(); i++) {
-                if (großerpfad.getPath().get(i).getVorgaenger().size() < 1) {
-                    großerpfad.getPath().get(i).setFruehestesende(großerpfad.getPath().get(i).getDauer());
-                } else if (großerpfad.getPath().get(i).getVorgaenger().size() > 0) {
-                    int beginn = großerpfad.getPath().get(i - 1).getFruehestesende();
-                    großerpfad.getPath().get(i).setFruehesterbeginn(beginn);
-                    großerpfad.getPath().get(i).setFruehestesende(großerpfad.getPath().get(i).getDauer() + beginn);
+                if (grosserPfad.getPath().get(i).getVorgaenger().size() < 1) {
+                    grosserPfad.getPath().get(i).setFruehestesende(grosserPfad.getPath().get(i).getDauer());
+                } else if (grosserPfad.getPath().get(i).getVorgaenger().size() > 0) {
+                    int beginn = grosserPfad.getPath().get(i - 1).getFruehestesende();
+                    grosserPfad.getPath().get(i).setFruehesterbeginn(beginn);
+                    grosserPfad.getPath().get(i).setFruehestesende(grosserPfad.getPath().get(i).getDauer() + beginn);
+                }
+            }
+        }
+        for (List<Knots> path : endpaths) {
+            for (Knots knots : path) {
+                if (knots.getVorgaenger().size() == 1) {
+                    int beginn = knots.getVorgaenger().get(0).getFruehestesende();
+                    knots.setFruehesterbeginn(beginn);
+                    knots.setFruehestesende(beginn + knots.getDauer());
                 }
             }
         }
         testPathList.addAll(paths);
-        testknotenliste = endpaths;
-        for (List<Knots> path : endpaths) {
-            for (int i = 0; i<path.size(); i++) {
-                if (path.get(i).getVorgaenger().size() == 1) {
-                    int beginn = path.get(i).getVorgaenger().get(0).getFruehestesende();
-                    path.get(i).setFruehesterbeginn(beginn);
-                    path.get(i).setFruehestesende(beginn+path.get(i).getDauer());
-                }
-            }
-        }
-
-        return resultAddedSuccessor;
+        return endpaths;
     }
 
     private List<List<Knots>> kalkulierePfade(List<Knots> knotenlist) {
