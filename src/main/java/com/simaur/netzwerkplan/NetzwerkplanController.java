@@ -41,7 +41,7 @@ public class NetzwerkplanController {
         List<List<Knots>> endpaths = kalkulierePfade(resultAddedSuccessor);
         for(int i = 0; i<endpaths.size(); i++) {
             for (int y = 0; y<endpaths.size(); y++) {
-                if (endpaths.get(i).equals(endpaths.get(y))) {
+                if (endpaths.get(i).equals(endpaths.get(y)) && endpaths.size()>1) {
                     endpaths.remove(y);
                 }
             }
@@ -81,7 +81,6 @@ public class NetzwerkplanController {
                 }
             }
         }
-        System.out.println(biggestPath.get(0).getFinalDuration());
         testPathList.addAll(paths);
         testknotenliste = endpaths;
         for (List<Knots> path : endpaths) {
@@ -123,6 +122,9 @@ public class NetzwerkplanController {
         for (List<Knots> looker : pfade) {
             for (Knots knoten : looker) {
                 System.out.print("Alte Pfadstücke " + knoten.getVorgangsnummer() + ", ");
+            }
+            if (looker.get(0).getVorgaenger().size()<1 && looker.get(looker.size()-1).getNachfolger().size()<1){
+                endpaths.add(looker);
             }
             System.out.println();
         }
