@@ -3,23 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Netzplan</title>
+    <style>
+    body {
+    text-align: center;
+    }
+        table {
+        margin: 0 auto;
+        text-align: center;
+        background-color: dimGrey;
+        color: #FEB0F4;
+        }
+        th {
+        width: 80px;
+        font-size: 14px;
+        }
+        .times {
+        color: #1EE308;
+        }
+        .buffer {
+        color: yellow;
+        }
+        .otherKnots {
+        color: blue;
+        }
+    </style>
 </head>
 <body>
 <h1>Netzplan</h1>
-<table>
+<div>
+<table border="25">
     <thead>
     <tr>
         <th>Vorgangsnummer</th>
         <th>Vorgangsbezeichnung</th>
         <th>Dauer</th>
-        <th>Frühester Beginn</th>
-        <th>Frühestes Ende</th>
-        <th>Spätester Beginn</th>
-        <th>Spätestes Ende</th>
-        <th>Gesamter Puffer</th>
-        <th>Freier Puffer</th>
-        <th>Vorgänger</th>
-        <th>Nachfolger</th>
+        <th class="times">FAZ</th>
+        <th class="times">FEZ</th>
+        <th class="times">SAZ</th>
+        <th class="times">SEZ</th>
+        <th class="buffer">Gesamtpuffer</th>
+        <th class="buffer">Freier Puffer</th>
+        <th class="otherKnots">Vorgänger</th>
+        <th class="otherKnots">Nachfolger</th>
     </tr>
     </thead>
     <tbody>
@@ -27,16 +52,17 @@
         <td th:text="${vorgang.vorgangsnummer}"></td>
         <td th:text="${vorgang.vorgangsbezeichnung}"></td>
         <td th:text="${vorgang.dauer}"></td>
-        <td th:text="${vorgang.fruehesterbeginn}"></td>
-        <td th:text="${vorgang.fruehestesende}"></td>
-        <td th:text="${vorgang.spaetesterbeginn}"></td>
-        <td th:text="${vorgang.spaetestesende}"></td>
-        <td th:text="${vorgang.gesamtpuffer}"></td>
-        <td th:text="${vorgang.freierpuffer}"></td>
-        <td><span th:each="vorgaengerResult : ${vorgang.vorgaenger}" th:text="${vorgaengerResult.vorgangsnummer}"></span></td>
-        <td><span th:each="nachfolgerResult : ${vorgang.nachfolger}" th:text="${nachfolgerResult.vorgangsnummer}"></span></td>
+        <td class="times" th:text="${vorgang.fruehesterbeginn}"></td>
+        <td class="times" th:text="${vorgang.fruehestesende}"></td>
+        <td class="times" th:text="${vorgang.spaetesterbeginn}"></td>
+        <td class="times" th:text="${vorgang.spaetestesende}"></td>
+        <td class="buffer" th:text="${vorgang.gesamtpuffer}"></td>
+        <td class="buffer" th:text="${vorgang.freierpuffer}"></td>
+        <td class="otherKnots"><span th:each="vorgaengerResult : ${vorgang.vorgaenger}" th:text="${vorgaengerResult.vorgangsnummer}"></span></td>
+        <td class="otherKnots"><span th:each="nachfolgerResult : ${vorgang.nachfolger}" th:text="${nachfolgerResult.vorgangsnummer}"></span></td>
     </tr>
     </tbody>
 </table>
+</div>
 </body>
 </html>

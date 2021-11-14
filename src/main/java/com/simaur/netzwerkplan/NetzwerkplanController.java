@@ -59,7 +59,7 @@ public class NetzwerkplanController {
         }
         for (List<Knots> pathTiming : pathsWithCalcedEarliestDurations) {
             for (int i = pathTiming.size()-1; i >=0; i--) {
-                if (pathTiming.get(i).getSpaetestesende() == 0) {
+                if (pathTiming.get(i).getSpaetestesende() == 0 && pathTiming.get(i).getNachfolger().size() > 0) {
                     int latestEnd = pathTiming.get(i+1).getSpaetesterbeginn();
                     pathTiming.get(i).setSpaetestesende(latestEnd);
                     pathTiming.get(i).setSpaetesterbeginn(latestEnd-pathTiming.get(i).getDauer());
