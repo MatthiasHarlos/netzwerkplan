@@ -88,30 +88,32 @@ class NetzwerkplanApplicationTests {
 	void someSOUTPut3() {
 		NetzwerkplanController controller = new NetzwerkplanController();
 		List<Beans> beanslist = new ArrayList<>();
-		beanslist.add(new Beans("Entscheidung GE",2,1,null,null,null));
-		beanslist.add(new Beans("Angebote einholen",14,2,1,null,null));
-		beanslist.add(new Beans("Mitarbeiterinformationen",1,3,2,null,null));
-		beanslist.add(new Beans("Testen G1",1,4,3,null,null));
-		beanslist.add(new Beans("Testen G2",2,5,4,null,null));
-		beanslist.add(new Beans("Testen G3",1,6,5,null,null));
-		beanslist.add(new Beans("Auswahl Lieferanten",1,7,6,null,null));
+		beanslist.add(new Beans("Vorgang1",2,1,null,null,null));
+		beanslist.add(new Beans("Vorgang2",14,2,1,null,null));
+		beanslist.add(new Beans("Vorgang3",1,3,2,null,null));
+		beanslist.add(new Beans("Vorgang4",1,4,3,null,null));
+		beanslist.add(new Beans("Vorgang5",2,5,4,null,null));
+		beanslist.add(new Beans("Vorgang6",1,6,5,null,null));
+		beanslist.add(new Beans("Vorgang7",1,7,6,null,null));
 		controller.beansliste.addAll(beanslist);
 		controller.calculateBeansToKnots(beanslist);
 		for (List<Knots> pfad : controller.testknotenliste) {
 			//System.out.println(pfad.getFinalDuration());
-			System.out.println("Vorgangsnummer: ");
+			System.out.print("Vorgangsnummer: ");
 			for (Knots knoten : pfad) {
 				System.out.print(knoten.getVorgangsnummer() + ", ");
 			}
-			System.out.println("frühestes Ende: ");
+			System.out.println();
+			System.out.print("frühestes Ende: ");
 			for (Knots knoten : pfad) {
 				System.out.print(knoten.getFruehestesende() + ", ");
 			}
-			System.out.println("frühester Beginn: ");
+			System.out.println();
+			System.out.print("frühester Beginn: ");
 			for (Knots knoten : pfad) {
 				System.out.print(knoten.getFruehesterbeginn() + ", ");
 			}
-			System.out.println("next");
+			System.out.println("\nnext");
 		}
 	}
 
@@ -126,19 +128,49 @@ class NetzwerkplanApplicationTests {
 		controller.calculateBeansToKnots(beanslist);
 		for (List<Knots> pfad : controller.testknotenliste) {
 			//System.out.println(pfad.getFinalDuration());
-			System.out.println("Vorgangsnummer: ");
+			System.out.print("Vorgangsnummer: ");
 			for (Knots knoten : pfad) {
 				System.out.print(knoten.getVorgangsnummer() + ", ");
 			}
-			System.out.println("frühestes Ende: ");
+			System.out.println();
+			System.out.print("frühestes Ende: ");
 			for (Knots knoten : pfad) {
 				System.out.print(knoten.getFruehestesende() + ", ");
 			}
-			System.out.println("frühester Beginn: ");
+			System.out.println();
+			System.out.print("frühester Beginn: ");
 			for (Knots knoten : pfad) {
 				System.out.print(knoten.getFruehesterbeginn() + ", ");
 			}
-			System.out.println("next");
+			System.out.println("\nnext");
+		}
+	}
+
+	@Test
+	void someSOUTPut5() {
+		NetzwerkplanController controller = new NetzwerkplanController();
+		List<Beans> beanslist = new ArrayList<>();
+		beanslist.add(new Beans("Entscheidung GE",2,1,null,null,null));
+		beanslist.add(new Beans("Angebote einholen",3,2,1,null,null));
+		controller.beansliste.addAll(beanslist);
+		controller.calculateBeansToKnots(beanslist);
+		for (List<Knots> pfad : controller.testknotenliste) {
+			//System.out.println(pfad.getFinalDuration());
+			System.out.print("Vorgangsnummer: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getVorgangsnummer() + ", ");
+			}
+			System.out.println();
+			System.out.print("frühestes Ende: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getFruehestesende() + ", ");
+			}
+			System.out.println();
+			System.out.print("frühester Beginn: ");
+			for (Knots knoten : pfad) {
+				System.out.print(knoten.getFruehesterbeginn() + ", ");
+			}
+			System.out.println("\nnext");
 		}
 	}
 

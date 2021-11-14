@@ -108,6 +108,8 @@ public class NetzwerkplanController {
                             zweig.add(nachfolger);
                             pfade.add(zweig);
                         }
+                    } else if (pfad.get(0).getVorgaenger().size()<1 && pfad.get(pfad.size()-1).getNachfolger().size()<1){
+                        endpaths.add(pfad);
                     }
                 }
             }
