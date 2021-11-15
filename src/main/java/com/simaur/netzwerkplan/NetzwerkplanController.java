@@ -29,6 +29,15 @@ public class NetzwerkplanController {
     public String result(Model model) {
         List<Knots> knotenliste = calculateBeansToKnots(beansliste);
         model.addAttribute("knotenliste", knotenliste);
+        List<Knots> gridList = new ArrayList<>(knotenliste);
+        for (int i = 0; i < gridList.size(); i++) {
+            if (gridList.get(i).getNachfolger().size() > 1) {
+                for (Knots knoten : gridList.get(i).getNachfolger()) {
+                    gridList.remove(knoten.getVorgangsnummer()-1);
+                }
+            }
+        }
+        model.addAttribute("gridListe", gridList);
         return "result-template";
     }
 
