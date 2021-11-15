@@ -33,9 +33,6 @@
         grid-template-columns: 10% 10% 10% 10% 10% 5%;
         }
 
-
-
-
         .flex {
         display: flex;
         align-items: baseline;
@@ -57,10 +54,7 @@
         grid-column: 2 / 6;
         grid-row: 2;
         }
-        .nachfolge {
-        grid-column: 6 / 10;
-        grid-row: 1 / 4;
-        }
+
         .dauer {
         grid-column: 2;
         grid-row: 3;
@@ -79,6 +73,48 @@
         }
         .sez {
         grid-column: 5;
+        grid-row: 4;
+        }
+
+        .nachfolge {
+        grid-column: 6 / 10;
+        grid-row: 1;
+        }
+
+        .fazn {
+        grid-column: 6;
+        grid-row: 1;
+        }
+        .fezn {
+        grid-column: 10;
+        grid-row: 1;
+        }
+        .vnn {
+        grid-column: 7;
+        grid-row: 2;
+        }
+        .vorgangsbezeichnungn {
+        grid-column: 7 / 11;
+        grid-row: 2;
+        }
+        .dauern {
+        grid-column: 7;
+        grid-row: 3;
+        }
+        .gpn {
+        grid-column: 8;
+        grid-row: 3;
+        }
+        .fpn {
+        grid-column: 9;
+        grid-row: 3;
+        }
+        .sazn {
+        grid-column: 6;
+        grid-row: 4;
+        }
+        .sezn {
+        grid-column: 10;
         grid-row: 4;
         }
 
@@ -140,17 +176,18 @@
     <div class="saz zeiten" th:text="${vorgang.spaetesterbeginn}">SAZ</div>
     <div class="sez zeiten" th:text="${vorgang.spaetestesende}">SEZ</div>
     <div class="nachfolge"><span th:each="nachfolgerResult : ${vorgang.nachfolger}" th:text="${nachfolgerResult.vorgangsnummer + ', '}"></span>
-        <div class="container" th:each="nachfolgerResult : ${vorgang.nachfolger}">
-    <div class="faz zeiten" th:text="${nachfolgerResult.fruehesterbeginn}">FAZ</div>
-    <div class="fez zeiten" th:text="${nachfolgerResult.fruehestesende}">FEZ</div>
-    <div class="vn"  th:text="${nachfolgerResult.vorgangsnummer}"> VN </div>
-    <div class="vorgangsbezeichnung" th:text="${nachfolgerResult.vorgangsbezeichnung}">Beispieltext</div>
-    <div class="dauer" th:text="${nachfolgerResult.dauer}">Dauer</div>
-    <div class="gp puffer" th:text="${nachfolgerResult.gesamtpuffer}">GP</div>
-    <div class="fp puffer" th:text="${nachfolgerResult.freierpuffer}">FP</div>
-    <div class="saz zeiten" th:text="${nachfolgerResult.spaetesterbeginn}">SAZ</div>
-    <div class="sez zeiten" th:text="${nachfolgerResult.spaetestesende}">SEZ</div>
-</div> </div>
+        <div th:if="${vorgang.nachfolger.size() > 1}" class="container" style="margin-left: -70%; margin-top: 5%" th:each="nachfolgerResult : ${vorgang.nachfolger}">
+            <div class="fazn zeiten" th:text="${nachfolgerResult.fruehesterbeginn}">FAZ</div>
+            <div class="fezn zeiten" th:text="${nachfolgerResult.fruehestesende}">FEZ</div>
+            <div class="vnn"  th:text="${nachfolgerResult.vorgangsnummer}"> VN </div>
+            <div class="vorgangsbezeichnungn" th:text="${nachfolgerResult.vorgangsbezeichnung}">Beispieltext</div>
+            <div class="dauern" th:text="${nachfolgerResult.dauer}">Dauer</div>
+            <div class="gpn puffer" th:text="${nachfolgerResult.gesamtpuffer}">GP</div>
+            <div class="fpn puffer" th:text="${nachfolgerResult.freierpuffer}">FP</div>
+            <div class="sazn zeiten" th:text="${nachfolgerResult.spaetesterbeginn}">SAZ</div>
+            <div class="sezn zeiten" th:text="${nachfolgerResult.spaetestesende}">SEZ</div>
+        </div>
+    </div>
 
 </div>
 </div>
