@@ -26,6 +26,61 @@
         .otherKnots {
         color: blue;
         }
+        .container {
+        display: grid;
+        grid-template-rows: 15px 2fr 15px 1fr 5px;
+        grid-template-columns: 10% 10% 10% 10% 10% 5%;
+        }
+
+        .faz {
+        grid-column: 1;
+        grid-row: 1;
+        }
+        .fez {
+        grid-column: 5;
+        grid-row: 1;
+        }
+        .vn {
+        grid-column: 2;
+        grid-row: 2;
+        }
+        .vorgangsbezeichnung {
+        grid-column: 2 / 6;
+        grid-row: 2;
+        }
+        .nachfolge {
+        grid-column: 6;
+        grid-row: 2;
+        }
+        .dauer {
+        grid-column: 2;
+        grid-row: 3;
+        }
+        .gp {
+        grid-column: 3;
+        grid-row: 3;
+        }
+        .fp {
+        grid-column: 4;
+        grid-row: 3;
+        }
+        .saz {
+        grid-column: 1;
+        grid-row: 4;
+        }
+        .sez {
+        grid-column: 5;
+        grid-row: 4;
+        }
+
+        .zeiten {
+        background: green;
+        }
+
+        .puffer {
+        background: yellow;
+        }
+
     </style>
 </head>
 <body>
@@ -64,5 +119,20 @@
     </tbody>
 </table>
 </div>
+
+<div class="container" th:each="vorgang : ${knotenliste}">
+    <div class="faz zeiten" th:text="${vorgang.fruehesterbeginn}">FAZ</div>
+    <div class="fez zeiten" th:text="${vorgang.fruehestesende}">FEZ</div>
+    <div class="vn"  th:text="${vorgang.vorgangsnummer}"> VN </div>
+    <div class="vorgangsbezeichnung" th:text="${vorgang.vorgangsbezeichnung}">Beispieltext</div>
+    <div class="nachfolge"><span th:each="nachfolgerResult : ${vorgang.nachfolger}" th:text="${nachfolgerResult.vorgangsnummer + ', '}">----</span></div>
+    <div class="dauer" th:text="${vorgang.dauer}">Dauer</div>
+    <div class="gp puffer" th:text="${vorgang.gesamtpuffer}">GP</div>
+    <div class="fp puffer" th:text="${vorgang.freierpuffer}">FP</div>
+    <div class="saz zeiten" th:text="${vorgang.spaetesterbeginn}">SAZ</div>
+    <div class="sez zeiten" th:text="${vorgang.spaetestesende}">SEZ</div>
+</div>
+
+
 </body>
 </html>
