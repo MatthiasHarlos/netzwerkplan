@@ -15,7 +15,7 @@ public class NetzwerkplanController {
 
     public List<Beans> beansliste = new ArrayList<>();
     public List<Paths> pathsList = new ArrayList<>();
-    private final List<Paths> biggestPath = new ArrayList<>();
+    private List<Paths> biggestPath = new ArrayList<>();
     public List<List<Knots>> testknotenliste = new ArrayList<>();
 
     @PostMapping("/changing")
@@ -30,14 +30,20 @@ public class NetzwerkplanController {
         List<Knots> knotenliste = calculateBeansToKnots(beansliste);
         model.addAttribute("knotenliste", knotenliste);
         List<Knots> gridList = new ArrayList<>(knotenliste);
+        List<Knots> otherBeginns = new ArrayList<>();
         for (int i = 0; i < gridList.size(); i++) {
             if (gridList.get(i).getNachfolger().size() > 1) {
                 for (Knots knoten : gridList.get(i).getNachfolger()) {
                     gridList.remove(knoten.getVorgangsnummer()-1);
                 }
             }
+            if (gridList.get(i).getVorgaenger().size() == 0 &&  i != 0) {
+                otherBeginns.add(gridList.get(i));
+                gridList.remove(i);
+            }
         }
         model.addAttribute("gridListe", gridList);
+        model.addAttribute("otherBeginns", otherBeginns);
         return "result-template";
     }
 
@@ -258,6 +264,8 @@ public class NetzwerkplanController {
     @GetMapping("/deleteAll")
     public String deletingAll(Beans beans) {
         beansliste = new ArrayList<>();
+        biggestPath = new ArrayList<>();
+        pathsList = new ArrayList<>();
         return "redirect:/startpage";
     }
 

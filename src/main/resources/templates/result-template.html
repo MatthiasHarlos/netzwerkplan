@@ -7,6 +7,11 @@
     body {
     text-align: center;
     }
+      .button-container2 {
+   margin: -15% auto;
+
+   text-align: center;
+   }
         table {
         margin: 0 auto;
         text-align: center;
@@ -125,6 +130,15 @@
         .puffer {
         background: yellow;
         }
+        .line {
+        background-color: green;
+        width: 100px;
+        height: 2px;
+        display: inline-block;
+        margin-top: 7%;
+        margin-left: -85%;
+        transform: rotate(30deg);
+        }
 
     </style>
 </head>
@@ -176,6 +190,7 @@
     <div class="saz zeiten" th:text="${vorgang.spaetesterbeginn}">SAZ</div>
     <div class="sez zeiten" th:text="${vorgang.spaetestesende}">SEZ</div>
     <div class="nachfolge"><span th:each="nachfolgerResult : ${vorgang.nachfolger}" th:text="${nachfolgerResult.vorgangsnummer + ', '}"></span>
+        <div class="line"></div>
         <div th:if="${vorgang.nachfolger.size() > 1}" class="container" style="margin-left: -70%; margin-top: 5%" th:each="nachfolgerResult : ${vorgang.nachfolger}">
             <div class="fazn zeiten" th:text="${nachfolgerResult.fruehesterbeginn}">FAZ</div>
             <div class="fezn zeiten" th:text="${nachfolgerResult.fruehestesende}">FEZ</div>
@@ -187,12 +202,17 @@
             <div class="sazn zeiten" th:text="${nachfolgerResult.spaetesterbeginn}">SAZ</div>
             <div class="sezn zeiten" th:text="${nachfolgerResult.spaetestesende}">SEZ</div>
         </div>
+        <div class="line"></div>
     </div>
+</div>
+</div>
 
-</div>
-</div>
 
 <svg width="500" height="500"><line  x1="50" y1="50" x2="350" y2="50" stroke="red"></line></svg>
-
+<div class="button-container2">
+    <form method="get" action="deleteAll">
+        <span class="button-action"><button type="submit">Reset</button></span>
+    </form>
+</div>
 </body>
 </html>
