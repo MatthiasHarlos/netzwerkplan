@@ -37,11 +37,12 @@ public class NetzwerkplanController {
                     gridList.remove(knoten.getVorgangsnummer()-1);
                 }
             }
-            if (gridList.get(i).getVorgaenger().size() == 0 &&  i != 0) {
-                otherBeginns.add(gridList.get(i));
-                gridList.remove(i);
-            }
+                if (gridList.get(i).getVorgaenger().size() < 1 && i != 0) {
+                    otherBeginns.add(gridList.get(i));
+                    System.out.println(otherBeginns);
+                }
         }
+        gridList.removeAll(otherBeginns);
         model.addAttribute("gridListe", gridList);
         model.addAttribute("otherBeginns", otherBeginns);
         return "result-template";
